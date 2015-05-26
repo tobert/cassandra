@@ -94,16 +94,15 @@ jvmver=`echo "$java_ver_output" | grep '[openjdk|java] version' | awk -F'"' 'NR=
 JVM_VERSION=${jvmver%_*}
 JVM_PATCH_VERSION=${jvmver#*_}
 
-if [ "$JVM_VERSION" \< "1.7" ] ; then
-    echo "Cassandra 2.0 and later require Java 7u25 or later."
+if [ "$JVM_VERSION" \< "1.8" ] ; then
+    echo "Cassandra 3.0 and later require Java 8u20 or later."
     exit 1;
 fi
 
-if [ "$JVM_VERSION" \< "1.8" ] && [ "$JVM_PATCH_VERSION" \< "25" ] ; then
-    echo "Cassandra 2.0 and later require Java 7u25 or later."
+if [ "$JVM_VERSION" \< "1.8" ] && [ "$JVM_PATCH_VERSION" \< "20" ] ; then
+    echo "Cassandra 3.0 and later require Java 8u20 or later."
     exit 1;
 fi
-
 
 jvm=`echo "$java_ver_output" | grep -A 1 'java version' | awk 'NR==2 {print $1}'`
 case "$jvm" in
@@ -287,9 +286,6 @@ fi
 # JVM_OPTS="$JVM_OPTS -XX:+PrintGCApplicationStoppedTime"
 # JVM_OPTS="$JVM_OPTS -XX:+PrintPromotionFailure"
 # JVM_OPTS="$JVM_OPTS -XX:PrintFLSStatistics=1"
-# JVM_OPTS="$JVM_OPTS -Xloggc:/var/log/cassandra/gc-`date +%s`.log"
-# If you are using JDK 6u34 7u2 or later you can enable GC log rotation
-# don't stick the date in the log name if rotation is on.
 # JVM_OPTS="$JVM_OPTS -Xloggc:/var/log/cassandra/gc.log"
 # JVM_OPTS="$JVM_OPTS -XX:+UseGCLogFileRotation"
 # JVM_OPTS="$JVM_OPTS -XX:NumberOfGCLogFiles=10"
