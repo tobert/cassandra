@@ -205,31 +205,31 @@ Function SetJsr223Env
         foreach ($file in Get-ChildItem -Path "$env:CASSANDRA_HOME\lib\jsr223\$jsrDir\*.jar")
         {
             $file = $file -replace "\\", "/"
-			$cp = $cp + ";" + """$file"""
+            $cp = $cp + ";" + """$file"""
         }
     }
     $env:CLASSPATH=$cp
 
-	# JSR223/JRuby - set ruby lib directory
-	if (Test-Path "$env:CASSANDRA_HOME\lib\jsr223\jruby\ruby")
-	{
-		$env:CASSANDRA_PARAMS=$env:CASSANDRA_PARAMS + " -Djruby.lib=$env:CASSANDRA_HOME\lib\jsr223\jruby"
-	}
-	# JSR223/JRuby - set ruby JNI libraries root directory
-	if (Test-Path "$env:CASSANDRA_HOME\lib\jsr223\jruby\jni")
-	{
-		$env:CASSANDRA_PARAMS=$env:CASSANDRA_PARAMS + " -Djffi.boot.library.path=$env:CASSANDRA_HOME\lib\jsr223\jruby\jni"
-	}
-	# JSR223/Jython - set python.home system property
-	if (Test-Path "$env:CASSANDRA_HOME\lib\jsr223\jython\jython.jar")
-	{
-		$env:CASSANDRA_PARAMS=$env:CASSANDRA_PARAMS + " -Dpython.home=$env:CASSANDRA_HOME\lib\jsr223\jython"
-	}
-	# JSR223/Scala - necessary system property
-	if (Test-Path "$env:CASSANDRA_HOME\lib\jsr223\scala\scala-compiler.jar")
-	{
-		$env:CASSANDRA_PARAMS=$env:CASSANDRA_PARAMS + " -Dscala.usejavacp=true"
-	}
+    # JSR223/JRuby - set ruby lib directory
+    if (Test-Path "$env:CASSANDRA_HOME\lib\jsr223\jruby\ruby")
+    {
+        $env:CASSANDRA_PARAMS=$env:CASSANDRA_PARAMS + " -Djruby.lib=$env:CASSANDRA_HOME\lib\jsr223\jruby"
+    }
+    # JSR223/JRuby - set ruby JNI libraries root directory
+    if (Test-Path "$env:CASSANDRA_HOME\lib\jsr223\jruby\jni")
+    {
+        $env:CASSANDRA_PARAMS=$env:CASSANDRA_PARAMS + " -Djffi.boot.library.path=$env:CASSANDRA_HOME\lib\jsr223\jruby\jni"
+    }
+    # JSR223/Jython - set python.home system property
+    if (Test-Path "$env:CASSANDRA_HOME\lib\jsr223\jython\jython.jar")
+    {
+        $env:CASSANDRA_PARAMS=$env:CASSANDRA_PARAMS + " -Dpython.home=$env:CASSANDRA_HOME\lib\jsr223\jython"
+    }
+    # JSR223/Scala - necessary system property
+    if (Test-Path "$env:CASSANDRA_HOME\lib\jsr223\scala\scala-compiler.jar")
+    {
+        $env:CASSANDRA_PARAMS=$env:CASSANDRA_PARAMS + " -Dscala.usejavacp=true"
+    }
 }
 
 #-----------------------------------------------------------------------------
@@ -444,7 +444,7 @@ Function SetCassandraEnvironment
     #
     # Due to potential security exploits, Cassandra ships with JMX accessible
     # *only* from localhost.  To enable remote JMX connections, uncomment lines below
-    # with authentication and ssl enabled. See https://wiki.apache.org/cassandra/JmxSecurity 
+    # with authentication and ssl enabled. See https://wiki.apache.org/cassandra/JmxSecurity
     #
     #$env:JVM_OPTS="$env:JVM_OPTS -Dcom.sun.management.jmxremote.port=$JMX_PORT"
     #$env:JVM_OPTS="$env:JVM_OPTS -Dcom.sun.management.jmxremote.ssl=false"
